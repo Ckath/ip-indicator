@@ -1,3 +1,5 @@
+/* see LICENSE file for copyright and license details. */
+
 #include <err.h>
 #include <fcntl.h>
 #include <ifaddrs.h>

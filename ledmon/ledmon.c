@@ -1,3 +1,5 @@
+/* see LICENSE file for copyright and license details. */
+
 #include <avr/io.h>
 #include <avr/interrupt.h>
 #include "lib/usart.h"
