@@ -66,6 +66,7 @@ open_port(const char *dev)
     fd = open(dev, O_RDWR | O_NOCTTY | O_NDELAY);
     if (fd == -1) {
         fprintf(stderr, "open_port: unable to open %s", dev);
+        exit(1);
     } else {
         fcntl(fd, F_SETFL, 0);
     }
