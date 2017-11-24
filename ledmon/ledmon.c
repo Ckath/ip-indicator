@@ -27,6 +27,10 @@ ISR(TIMER2_OVF_vect)
 {
     if (++delay > 100) {
         delay = 0;
+
+        /* if no updates have been received 
+           10 times in a row blink error pattern,
+           otherwise blink status. */
         if (update == last_update) {
             if (++no_update > 10) {
                 no_update = 0;
@@ -55,18 +59,19 @@ ISR(TIMER2_OVF_vect)
 }
 
 int main() {
+    /* setup outputs */
     DDRD = RED | YELLOW | GREEN;
+
+    /* setup the timer interrupt, 
+       start interrupt and usart */
     TCCR2B |= (1 << CS22) | (1 << CS20);
     TIMSK2 |= (1 << TOIE2);
     TCNT2 = 0;
     sei();
-
     USART_init(9600);
-    char state;
 
     for (;;) {
-        state = USART_getch();
-        switch (state) {
+        switch (USART_getch()) {
             case CORRECT_IP:
                 color = GREEN;
                 update++;
