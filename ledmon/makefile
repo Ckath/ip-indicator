@@ -2,9 +2,9 @@
 
 DEV="/dev/ttyACM0"
 MODEL="atmega328p"
-NAME=ledmon
-LIB=lib/usart
-CC=avr-gcc
+NAME="ledmon"
+LIB="lib/usart"
+CC="avr-gcc"
 
 options:
 	@echo ${NAME} make options:
@@ -17,12 +17,12 @@ clean:
 	@rm -f ${NAME} *.o *.hex lib/*.o
 
 ${LIB}.o: ${LIB}.c
-	@avr-gcc -Os -DF_CPU=16000000UL -mmcu=${MODEL} -c -o ${LIB}.o ${LIB}.c
+	@${CC} -Os -DF_CPU=16000000UL -mmcu=${MODEL} -c -o ${LIB}.o ${LIB}.c
 
 hex: ${LIB}.o
 	@echo compiling binary
-	@avr-gcc -Os -DF_CPU=16000000UL -mmcu=${MODEL} -c -o ${NAME}.o ${NAME}.c
-	@avr-gcc -mmcu=${MODEL} ${NAME}.o ${LIB}.o -o ${NAME}
+	@${CC} -Os -DF_CPU=16000000UL -mmcu=${MODEL} -c -o ${NAME}.o ${NAME}.c
+	@${CC} -mmcu=${MODEL} ${NAME}.o ${LIB}.o -o ${NAME}
 	@avr-objcopy -O ihex -R .eeprom ${NAME} ${NAME}.hex
 
 flash: hex
