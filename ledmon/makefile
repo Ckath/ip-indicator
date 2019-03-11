@@ -1,10 +1,10 @@
 # see LICENSE file for copyright and license details.
 
-DEV="/dev/ttyACM0"
-MODEL="atmega328p"
-NAME="ledmon"
-LIB="lib/usart"
-CC="avr-gcc"
+DEV=/dev/ttyACM0
+MODEL=atmega328p
+NAME=ledmon
+LIB=lib/usart
+CC=avr-gcc
 
 options:
 	@echo ${NAME} make options:
